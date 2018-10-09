@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50720
 File Encoding         : 65001
 
-Date: 2018-10-09 19:09:51
+Date: 2018-10-09 20:49:30
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -43,6 +43,39 @@ INSERT INTO `department` VALUES ('8', '销售部', '3', '5');
 INSERT INTO `department` VALUES ('9', '就业部', '2', '6');
 INSERT INTO `department` VALUES ('10', '教学部', '3', '19');
 INSERT INTO `department` VALUES ('11', '教务部', '10', '19');
+
+-- ----------------------------
+-- Table structure for file
+-- ----------------------------
+DROP TABLE IF EXISTS `file`;
+CREATE TABLE `file` (
+  `file_id` int(10) NOT NULL,
+  `file_name` varchar(255) NOT NULL,
+  `file_url` varchar(255) DEFAULT NULL,
+  `file_owner` int(10) DEFAULT NULL,
+  `file_status` int(1) DEFAULT '1',
+  PRIMARY KEY (`file_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- ----------------------------
+-- Records of file
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for form
+-- ----------------------------
+DROP TABLE IF EXISTS `form`;
+CREATE TABLE `form` (
+  `form_id` int(10) NOT NULL,
+  `form_name` varchar(255) DEFAULT NULL,
+  `form_url` varchar(255) DEFAULT NULL,
+  `form_status` int(10) DEFAULT '1',
+  PRIMARY KEY (`form_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- ----------------------------
+-- Records of form
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for menu
@@ -535,6 +568,22 @@ INSERT INTO `role` VALUES ('29', '分管业务副总I-王琰', '2');
 INSERT INTO `role` VALUES ('30', '分管业务副总II-余笑', '3');
 
 -- ----------------------------
+-- Table structure for status
+-- ----------------------------
+DROP TABLE IF EXISTS `status`;
+CREATE TABLE `status` (
+  `status_id` int(10) NOT NULL,
+  `status_name` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`status_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- ----------------------------
+-- Records of status
+-- ----------------------------
+INSERT INTO `status` VALUES ('1', '正常使用');
+INSERT INTO `status` VALUES ('2', '已注销');
+
+-- ----------------------------
 -- Table structure for user
 -- ----------------------------
 DROP TABLE IF EXISTS `user`;
@@ -545,36 +594,59 @@ CREATE TABLE `user` (
   `nickname` varchar(255) DEFAULT NULL,
   `avatar` varchar(255) DEFAULT NULL,
   `leader_id` int(10) DEFAULT NULL,
-  `status` int(1) DEFAULT '0',
-  PRIMARY KEY (`user_id`)
+  `status` int(10) DEFAULT '1',
+  PRIMARY KEY (`user_id`),
+  KEY `fk_status` (`status`),
+  CONSTRAINT `fk_status` FOREIGN KEY (`status`) REFERENCES `status` (`status_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8mb4;
 
 -- ----------------------------
 -- Records of user
 -- ----------------------------
-INSERT INTO `user` VALUES ('1', 'admin', '21232F297A57A5A743894A0E4A801FC3', 'admin', null, null, '0');
-INSERT INTO `user` VALUES ('2', 'maxuemei', '202CB962AC59075B964B07152D234B70', '马雪梅', null, '11', '0');
-INSERT INTO `user` VALUES ('3', 'nixiaoyu', '202CB962AC59075B964B07152D234B70', '倪笑宇', null, '11', '0');
-INSERT INTO `user` VALUES ('4', 'zhangming', '202CB962AC59075B964B07152D234B70', '张明', null, '11', '0');
-INSERT INTO `user` VALUES ('5', 'huofang', '202CB962AC59075B964B07152D234B70', '霍芳', null, '7', '0');
-INSERT INTO `user` VALUES ('6', 'sunlirui', '202CB962AC59075B964B07152D234B70', '孙丽睿', null, '8', '0');
-INSERT INTO `user` VALUES ('7', 'yuxiao', '202CB962AC59075B964B07152D234B70', '余笑', null, '11', '0');
-INSERT INTO `user` VALUES ('8', 'wangyan', '202CB962AC59075B964B07152D234B70', '王琰', null, '11', '0');
-INSERT INTO `user` VALUES ('9', 'zhoufeng', '202CB962AC59075B964B07152D234B70', '周峰', null, '11', '0');
-INSERT INTO `user` VALUES ('10', 'wangwei', '202CB962AC59075B964B07152D234B70', '王威', null, '11', '0');
-INSERT INTO `user` VALUES ('11', 'libo', '202CB962AC59075B964B07152D234B70', '李波', null, null, '0');
-INSERT INTO `user` VALUES ('12', 'zhuminghua', '202CB962AC59075B964B07152D234B70', '朱明华', null, '2', '0');
-INSERT INTO `user` VALUES ('13', 'kangshanshan', '202CB962AC59075B964B07152D234B70', '康珊珊', null, '3', '0');
-INSERT INTO `user` VALUES ('14', 'xujiayao', '202CB962AC59075B964B07152D234B70', '徐佳瑶', null, '13', '0');
-INSERT INTO `user` VALUES ('15', 'lipingran', '202CB962AC59075B964B07152D234B70', '李品然', null, '5', '0');
-INSERT INTO `user` VALUES ('16', 'wanglixia', '202CB962AC59075B964B07152D234B70', '王丽霞', null, '5', '0');
-INSERT INTO `user` VALUES ('17', 'donghuanhuan', '202CB962AC59075B964B07152D234B70', '董欢欢', null, '6', '0');
-INSERT INTO `user` VALUES ('18', 'zhuqiong', '202CB962AC59075B964B07152D234B70', '朱琼', null, '17', '0');
-INSERT INTO `user` VALUES ('19', 'gongweibin', '202CB962AC59075B964B07152D234B70', '龚玮斌', null, '7', '0');
-INSERT INTO `user` VALUES ('20', 'fengrui', '202CB962AC59075B964B07152D234B70', '冯瑞', null, '19', '0');
-INSERT INTO `user` VALUES ('21', 'chenchen', '202CB962AC59075B964B07152D234B70', '陈晨', null, '19', '0');
-INSERT INTO `user` VALUES ('22', 'zhaokai', '202CB962AC59075B964B07152D234B70', '赵凯', null, '19', '0');
-INSERT INTO `user` VALUES ('23', 'caigenrong', '202CB962AC59075B964B07152D234B70', '蔡根荣', null, '19', '0');
-INSERT INTO `user` VALUES ('24', 'wenshuqing', '202CB962AC59075B964B07152D234B70', '闻书晴', null, '19', '0');
-INSERT INTO `user` VALUES ('25', 'chengfengjiao', '202CB962AC59075B964B07152D234B70', '陈凤娇', null, '3', '0');
+INSERT INTO `user` VALUES ('1', 'admin', '21232F297A57A5A743894A0E4A801FC3', 'admin', null, null, '1');
+INSERT INTO `user` VALUES ('2', 'maxuemei', '202CB962AC59075B964B07152D234B70', '马雪梅', null, '11', '1');
+INSERT INTO `user` VALUES ('3', 'nixiaoyu', '202CB962AC59075B964B07152D234B70', '倪笑宇', null, '11', '1');
+INSERT INTO `user` VALUES ('4', 'zhangming', '202CB962AC59075B964B07152D234B70', '张明', null, '11', '1');
+INSERT INTO `user` VALUES ('5', 'huofang', '202CB962AC59075B964B07152D234B70', '霍芳', null, '7', '1');
+INSERT INTO `user` VALUES ('6', 'sunlirui', '202CB962AC59075B964B07152D234B70', '孙丽睿', null, '8', '1');
+INSERT INTO `user` VALUES ('7', 'yuxiao', '202CB962AC59075B964B07152D234B70', '余笑', null, '11', '1');
+INSERT INTO `user` VALUES ('8', 'wangyan', '202CB962AC59075B964B07152D234B70', '王琰', null, '11', '1');
+INSERT INTO `user` VALUES ('9', 'zhoufeng', '202CB962AC59075B964B07152D234B70', '周峰', null, '11', '1');
+INSERT INTO `user` VALUES ('10', 'wangwei', '202CB962AC59075B964B07152D234B70', '王威', null, '11', '1');
+INSERT INTO `user` VALUES ('11', 'libo', '202CB962AC59075B964B07152D234B70', '李波', null, null, '1');
+INSERT INTO `user` VALUES ('12', 'zhuminghua', '202CB962AC59075B964B07152D234B70', '朱明华', null, '2', '1');
+INSERT INTO `user` VALUES ('13', 'kangshanshan', '202CB962AC59075B964B07152D234B70', '康珊珊', null, '3', '1');
+INSERT INTO `user` VALUES ('14', 'xujiayao', '202CB962AC59075B964B07152D234B70', '徐佳瑶', null, '13', '1');
+INSERT INTO `user` VALUES ('15', 'lipingran', '202CB962AC59075B964B07152D234B70', '李品然', null, '5', '1');
+INSERT INTO `user` VALUES ('16', 'wanglixia', '202CB962AC59075B964B07152D234B70', '王丽霞', null, '5', '1');
+INSERT INTO `user` VALUES ('17', 'donghuanhuan', '202CB962AC59075B964B07152D234B70', '董欢欢', null, '6', '1');
+INSERT INTO `user` VALUES ('18', 'zhuqiong', '202CB962AC59075B964B07152D234B70', '朱琼', null, '17', '1');
+INSERT INTO `user` VALUES ('19', 'gongweibin', '202CB962AC59075B964B07152D234B70', '龚玮斌', null, '7', '1');
+INSERT INTO `user` VALUES ('20', 'fengrui', '202CB962AC59075B964B07152D234B70', '冯瑞', null, '19', '1');
+INSERT INTO `user` VALUES ('21', 'chenchen', '202CB962AC59075B964B07152D234B70', '陈晨', null, '19', '1');
+INSERT INTO `user` VALUES ('22', 'zhaokai', '202CB962AC59075B964B07152D234B70', '赵凯', null, '19', '1');
+INSERT INTO `user` VALUES ('23', 'caigenrong', '202CB962AC59075B964B07152D234B70', '蔡根荣', null, '19', '1');
+INSERT INTO `user` VALUES ('24', 'wenshuqing', '202CB962AC59075B964B07152D234B70', '闻书晴', null, '19', '1');
+INSERT INTO `user` VALUES ('25', 'chengfengjiao', '202CB962AC59075B964B07152D234B70', '陈凤娇', null, '3', '1');
+
+-- ----------------------------
+-- Table structure for user_info
+-- ----------------------------
+DROP TABLE IF EXISTS `user_info`;
+CREATE TABLE `user_info` (
+  `info_id` int(10) NOT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  `gender` varchar(255) DEFAULT NULL,
+  `age` int(10) DEFAULT NULL,
+  `phone` varchar(255) DEFAULT NULL,
+  `email` varchar(255) DEFAULT NULL,
+  `user_id` int(10) DEFAULT NULL,
+  PRIMARY KEY (`info_id`),
+  KEY `fk_user_id` (`user_id`),
+  CONSTRAINT `fk_user_id` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- ----------------------------
+-- Records of user_info
+-- ----------------------------
 SET FOREIGN_KEY_CHECKS=1;
