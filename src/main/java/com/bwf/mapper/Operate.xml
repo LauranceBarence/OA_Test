@@ -5,14 +5,6 @@
 <!-- 对应 dao 中的 接口 -->
 <mapper namespace="com.bwf.dao.OperateMapper">
 
-	<resultMap type="com.bwf.entity.Operate" id="operate">
-		<id column="operate_id" property="operateId"/>
-		<result column="operate_name" property="operateName"/>
-		<result column="operate_action" property="operateAction"/>
-		<result column="operate_url" property="operateUrl"/>
-		<result column="pid" property="pid"/>
-
-	</resultMap>
 
 
 </mapper>
