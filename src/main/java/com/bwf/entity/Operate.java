@@ -5,7 +5,7 @@ public class Operate {
 	private String operateName;
 	private String operateCode;
 	private String operateUrl;
-	private Integer pid;
+	private Integer pId;
 	public Integer getOperateId() {
 		return operateId;
 	}
@@ -30,10 +30,17 @@ public class Operate {
 	public void setOperateUrl(String operateUrl) {
 		this.operateUrl = operateUrl;
 	}
-	public Integer getPid() {
-		return pid;
+	
+	public Integer getpId() {
+		return pId;
 	}
-	public void setPid(Integer pid) {
-		this.pid = pid;
+	public void setpId(Integer pId) {
+		this.pId = pId;
 	}
+	@Override
+	public String toString() {
+		return "Operate [operateId=" + operateId + ", operateName=" + operateName + ", operateCode=" + operateCode
+				+ ", operateUrl=" + operateUrl + "]";
+	}
+	
 }

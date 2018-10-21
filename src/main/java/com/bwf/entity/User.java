@@ -8,12 +8,26 @@ public class User {
 	private String password;
 	private String nickname;
 	private String avater;
+	private Integer leaderId;
 	private User leader;
 	private Integer status;
+	private Role role;
 	private List<Menu> menus;
 	private List<Operate> operates;
 	
 	
+	public Integer getLeaderId() {
+		return leaderId;
+	}
+	public void setLeaderId(Integer leaderId) {
+		this.leaderId = leaderId;
+	}
+	public Role getRole() {
+		return role;
+	}
+	public void setRole(Role role) {
+		this.role = role;
+	}
 	public Integer getUserId() {
 		return userId;
 	}
@@ -69,6 +83,7 @@ public class User {
 	public void setOperates(List<Operate> operates) {
 		this.operates = operates;
 	}
+	
 	@Override
 	public String toString() {
 		return "User [userId=" + userId + ", username=" + username + ", nickname=" + nickname + ", avater=" + avater

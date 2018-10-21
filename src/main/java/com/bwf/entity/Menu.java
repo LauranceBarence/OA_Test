@@ -23,11 +23,18 @@ public class Menu {
 	public void setMenuUrl(String menuUrl) {
 		this.menuUrl = menuUrl;
 	}
+	
 	public Integer getpId() {
 		return pId;
 	}
 	public void setpId(Integer pId) {
 		this.pId = pId;
 	}
+	@Override
+	public String toString() {
+		return "Menu [menuId=" + menuId + ", menuName=" + menuName + ", menuUrl=" + menuUrl + ", pId=" + pId + "]";
+	}
+	
+	
 	
 }
